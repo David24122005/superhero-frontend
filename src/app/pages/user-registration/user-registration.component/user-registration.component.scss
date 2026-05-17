@@ -1,0 +1,55 @@
+
+.form-group {
+margin-bottom: 20px;
+label { display: block; margin-bottom: 8px; font-weight: bold; color: #34495e; }
+input {
+width: 100%;
+padding: 12px;
+border: 2px solid #ddd;
+border-radius: 8px;
+transition: border-color 0.3s;
+&:focus { border-color: #e74c3c; outline: none; }
+}
+}
+
+
+.btn-submit {
+width: 100%;
+padding: 15px;
+background-color: #e74c3c;
+color: white;
+border: none;
+border-radius: 8px;
+font-size: 1rem;
+font-weight: bold;
+cursor: pointer;
+&:disabled { background-color: #bdc3c7; cursor: not-allowed; }
+}
+
+.error { color: #e74c3c; font-size: 0.8rem; margin-top: 5px; display: block; }
+
+.feedback {
+margin-top: 20px;
+padding: 10px;
+border-radius: 5px;
+text-align: center;
+}
+.msg-success { background: #d4edda; color: #155724; }
+.msg-error { background: #f8d7da; color: #721c24; }
+.registration-container {
+max-width: 500px;
+margin: 40px auto;
+padding: 30px;
+background: white;
+border-radius: 12px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+text-align: center;
+
+h2 { color: #2c3e50; margin-bottom: 10px; }
+p { color: #7f8c8d; margin-bottom: 30px; }
+}
+
+.hero-form {
+text-align: left;
+
+}

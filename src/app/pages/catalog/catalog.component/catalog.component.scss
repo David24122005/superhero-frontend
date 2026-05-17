@@ -36,7 +36,7 @@ transform: translateY(-10px);
 box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 
 .card-image .overlay {
-opacity: 1;
+opacity: 1; // Muestra el botón al hacer hover
 }
 .card-image img {
 transform: scale(1.1);
@@ -64,18 +64,20 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background: rgba(0, 0, 0, 0.3);
-justify-content: flex-end;
-align-items: flex-start;
-padding: 12px;
-opacity: 1;
+background: rgba(0, 0, 0, 0.3); // Oscurece sutilmente
+justify-content: flex-end; // Empuja al botón a la derecha
+align-items: flex-start; // Empuja al botón hacia arriba
+padding: 12px; // Espacio desde la esquina
+opacity: 1; // Si quieres que se vea siempre, déjalo en 1
+//transition: opacity 0.3s ease;
 z-index: 2;
 
+// EL BOTÓN AHORA ESTÁ AQUÍ ADENTRO
 .btn-fav {
 background-color: rgba(255, 255, 255, 0.8);
 color: #e74c3c;
 border: none;
-width: 40px;
+width: 40px; // Lo hacemos circular
 height: 40px;
 border-radius: 50%;
 font-size: 1.2rem;

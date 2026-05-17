@@ -1,0 +1,31 @@
+<div class="catalog-header">
+<h2>Mis Favoritos ❤️</h2>
+<p>Tu liga personal de defensores.</p>
+</div>
+
+@if (loading) {
+<div class="loader">Cargando tus favoritos...</div>
+} @else if (favorites.length > 0) {
+<div class="hero-grid">
+@for (heroe of favorites; track heroe.id) {
+<div class="hero-card">
+<div class="card-image">
+<img [src]="heroe.imagen_url ? 'assets/images/' + heroe.imagen_url : 'assets/images/placeholder.png'" [alt]="heroe.nombre">
+<div class="overlay">
+<button
+(click)="removeFromFavorites(heroe)"
+class="btn-fav is-fav">
+❤️
+</button>
+</div>
+</div>
+<div class="card-content">
+<h3>{{ heroe.nombre }}</h3>
+<p class="power-tag">{{ heroe.poder }}</p>
+</div>
+</div>
+}
+</div>
+} @else {
+<div class="empty-msg">Aún no has guardado ningún héroe.</div>
+}

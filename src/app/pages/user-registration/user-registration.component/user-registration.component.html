@@ -1,0 +1,38 @@
+<div class="registration-container">
+<h2>Crear Nueva Cuenta de Héroe</h2>
+<p>Regístrate para gestionar tus superhéroes favoritos.</p>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="hero-form">
+<div class="form-group">
+<label>Nombre Completo</label>
+<input type="text" formControlName="nombre" placeholder="Ej. Tony Stark">
+<span class="error" *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
+El nombre es requerido (mín. 3 caracteres).
+</span>
+</div>
+
+<div class="form-group">
+<label>Correo Electrónico</label>
+<input type="email" formControlName="email" placeholder="heroe@avengers.com">
+<span class="error" *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+Ingresa un correo válido.
+</span>
+</div>
+
+<div class="form-group">
+<label>Contraseña</label>
+<input type="password" formControlName="password" placeholder="******">
+<span class="error" *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+Mínimo 6 caracteres.
+</span>
+</div>
+
+<button type="submit" [disabled]="registerForm.invalid" class="btn-submit">
+Registrar Usuario
+</button>
+
+<div *ngIf="message" [ngClass]="{'msg-success': !isError, 'msg-error': isError}" class="feedback">
+{{ message }}
+</div>
+</form>
+</div>
