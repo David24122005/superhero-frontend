@@ -1,0 +1,118 @@
+@if (hero) {
+<div class="modal-backdrop" (click)="onBackdropClick($event)">
+  <div class="modal-panel" role="dialog" aria-modal="true" [attr.aria-label]="hero.nombre">
+
+    <!-- Header con imagen -->
+    <div class="modal-hero-header">
+      <img
+        [src]="'assets/images/' + hero.imagen_url"
+        [alt]="hero.nombre"
+        class="hero-portrait"
+        (error)="onImgError($event)"
+      />
+      <div class="header-overlay"></div>
+      <button class="btn-close" (click)="close()" aria-label="Cerrar">✕</button>
+      <div class="hero-title-block">
+        <h2>{{ editMode ? 'Editando héroe' : hero.nombre }}</h2>
+        <span class="hero-id-badge">#{{ hero.id }}</span>
+      </div>
+    </div>
+
+    <!-- Cuerpo -->
+    <div class="modal-body">
+
+      <!-- MODO VISTA -->
+      @if (!editMode) {
+        <div class="stats-grid">
+          <div class="stat-card poder">
+            <span class="stat-icon">⚡</span>
+            <div class="stat-info">
+              <label>Superpoder</label>
+              <p>{{ hero.poder }}</p>
+            </div>
+          </div>
+          <div class="stat-card fortaleza">
+            <span class="stat-icon">🛡️</span>
+            <div class="stat-info">
+              <label>Fortaleza</label>
+              <p>{{ hero.fortaleza || 'Desconocida' }}</p>
+            </div>
+          </div>
+          <div class="stat-card resistencia">
+            <span class="stat-icon">💪</span>
+            <div class="stat-info">
+              <label>Resistencia</label>
+              <p>{{ hero.resistencia || 'Desconocida' }}</p>
+            </div>
+          </div>
+          <div class="stat-card debilidad">
+            <span class="stat-icon">⚠️</span>
+            <div class="stat-info">
+              <label>Debilidad</label>
+              <p>{{ hero.debilidad || 'Desconocida' }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botones de acción vista -->
+        <div class="modal-actions">
+          <button class="btn-fav" (click)="toggleFav()" [class.active]="hero.esFavorito">
+            {{ hero.esFavorito ? '❤️ En favoritos' : '🤍 Añadir a favoritos' }}
+          </button>
+          @if (isLoggedIn) {
+            <button class="btn-edit" (click)="enterEditMode()">
+              ✏️ Editar héroe
+            </button>
+          }
+          <button class="btn-secondary" (click)="close()">Cerrar</button>
+        </div>
+      }
+
+      <!-- MODO EDICIÓN -->
+      @if (editMode) {
+        <form (ngSubmit)="saveChanges()" #editForm="ngForm" class="edit-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nombre</label>
+              <input type="text" [(ngModel)]="editData.nombre" name="nombre" required />
+            </div>
+            <div class="form-group">
+              <label>Superpoder</label>
+              <input type="text" [(ngModel)]="editData.poder" name="poder" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Fortaleza</label>
+              <input type="text" [(ngModel)]="editData.fortaleza" name="fortaleza" />
+            </div>
+            <div class="form-group">
+              <label>Resistencia</label>
+              <input type="text" [(ngModel)]="editData.resistencia" name="resistencia" />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label>Debilidad</label>
+            <input type="text" [(ngModel)]="editData.debilidad" name="debilidad" />
+          </div>
+          <div class="form-group full-width">
+            <label>Imagen (nombre de archivo)</label>
+            <input type="text" [(ngModel)]="editData.imagen_url" name="imagen_url" required />
+            <small>Ej: Batman.png (debe existir en assets/images/)</small>
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn-save" [disabled]="!editForm.valid || saving">
+              {{ saving ? '⏳ Guardando...' : '💾 Guardar cambios' }}
+            </button>
+            <button type="button" class="btn-secondary" (click)="cancelEdit()">
+              Cancelar
+            </button>
+          </div>
+        </form>
+      }
+
+    </div>
+  </div>
+</div>
+}

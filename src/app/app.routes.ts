@@ -7,6 +7,8 @@ import { Login } from './pages/login/login/login';
 import { FavoritesComponent } from './pages/favorites/favorites.component/favorites.component';
 import { AddHeroComponent } from './pages/add-hero/add-hero.component/add-hero.component';
 import { AboutComponent } from './pages/about/about.component/about.component';
+import { ProfileComponent } from './pages/profile.component/profile.component'; // <-- NUEVO
+``
 
 export const routes: Routes = [
 
@@ -16,6 +18,7 @@ export const routes: Routes = [
 { path: 'add-hero', component: AddHeroComponent, canActivate: [AuthGuard] },
 { path: 'login', component: Login },
 { path: 'favoritos', component: FavoritesComponent, canActivate: [AuthGuard] },
+{ path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 { path: '**', component: CatalogComponent },
 ];  
 

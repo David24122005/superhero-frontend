@@ -1,0 +1,321 @@
+// Variables del proyecto
+$primary: #2c3e50;
+$accent: #3498db;
+$danger: #e74c3c;
+$success: #27ae60;
+$warning: #f39c12;
+$light-bg: #f5f6fa;
+$card-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+$transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+// Backdrop
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+// Panel principal
+.modal-panel {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 2px; }
+}
+
+// Header con imagen de héroe
+.modal-hero-header {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  background: #1a1a2e;
+
+  .hero-portrait {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    transition: transform 0.4s ease;
+  }
+
+  .header-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 40%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+  }
+
+  .btn-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+    z-index: 2;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(1.1);
+    }
+  }
+
+  .hero-title-block {
+    position: absolute;
+    bottom: 18px;
+    left: 22px;
+    right: 22px;
+    z-index: 2;
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+
+    h2 {
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin: 0;
+      line-height: 1.1;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+
+    .hero-id-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+  }
+}
+
+// Cuerpo del modal
+.modal-body {
+  padding: 24px;
+}
+
+// Grid de stats
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px solid;
+  transition: $transition;
+
+  &:hover { transform: translateY(-2px); }
+
+  .stat-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .stat-info {
+    label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+    }
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: $primary;
+      line-height: 1.4;
+    }
+  }
+
+  &.poder {
+    background: #eef8ff;
+    border-color: #b3d9f5;
+    label { color: $accent; }
+  }
+  &.fortaleza {
+    background: #eafaf1;
+    border-color: #a9dfbf;
+    label { color: $success; }
+  }
+  &.resistencia {
+    background: #fef9e7;
+    border-color: #f9e4b7;
+    label { color: $warning; }
+  }
+  &.debilidad {
+    background: #fdedec;
+    border-color: #f5b7b1;
+    label { color: $danger; }
+  }
+}
+
+// Acciones del modal
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+
+  button {
+    flex: 1;
+    min-width: 120px;
+    padding: 11px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: $transition;
+    border: none;
+  }
+
+  .btn-fav {
+    background: #fdedec;
+    color: $danger;
+    border: 1.5px solid #f5b7b1;
+
+    &.active {
+      background: $danger;
+      color: #fff;
+      border-color: $danger;
+    }
+    &:hover { transform: scale(1.02); }
+  }
+
+  .btn-edit {
+    background: #eef8ff;
+    color: $accent;
+    border: 1.5px solid #b3d9f5;
+    &:hover { background: $accent; color: #fff; border-color: $accent; }
+  }
+
+  .btn-save {
+    background: $success;
+    color: #fff;
+    &:hover:not(:disabled) { background: darken($success, 8%); }
+    &:disabled { background: #bdc3c7; cursor: not-allowed; }
+  }
+
+  .btn-secondary {
+    background: $light-bg;
+    color: #7f8c8d;
+    border: 1.5px solid #dde;
+    &:hover { background: #e8e8ee; }
+  }
+}
+
+// Formulario de edición
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+
+    &.full-width { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #555;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    input {
+      padding: 10px 13px;
+      border: 1.5px solid #dde;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      color: $primary;
+      background: #fff;
+      transition: border-color 0.2s;
+
+      &:focus {
+        border-color: $accent;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.12);
+      }
+    }
+
+    small {
+      margin-top: 5px;
+      font-size: 0.75rem;
+      color: #95a5a6;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 580px) {
+  .modal-backdrop { padding: 0; align-items: flex-end; }
+
+  .modal-panel {
+    max-height: 95vh;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .stats-grid { grid-template-columns: 1fr; }
+
+  .edit-form .form-row { grid-template-columns: 1fr; }
+}

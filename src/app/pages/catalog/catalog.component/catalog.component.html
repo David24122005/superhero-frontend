@@ -1,32 +1,42 @@
+
 <div class="catalog-header">
-<h2>Catálogo de Superhéroes</h2>
-<p>Explora la liga de defensores de la justicia.</p>
+  <h2>Catálogo de Superhéroes</h2>
+  <p>Explora la liga de defensores de la justicia.</p>
 </div>
 
 @if (loading) {
-<div class="loader">Cargando héroes...</div>
+  <div class="loader">Cargando héroes...</div>
 } @else if (heroes.length > 0) {
-<div class="hero-grid">
-@for (heroe of heroes; track heroe.id) {
-<div class="hero-card">
-<div class="card-image">
-<img [src]="heroe.imagen_url ? 'assets/images/' + (heroe.imagen_url.startsWith('/') ? heroe.imagen_url.substring(1) : heroe.imagen_url) : 'assets/images/Placeholder.png'" [alt]="heroe.nombre">
-<div class="overlay">
-<button
-(click)="addToFavorites(heroe)"
-[class.is-fav]="heroe.esFavorito"
-class="btn-fav">
-{{ heroe.esFavorito ? '❤️' : '🤍' }}
-</button>
-</div>
-</div>
-<div class="card-content">
-<h3>{{ heroe.nombre }}</h3>
-<p class="power-tag">{{ heroe.poder }}</p>
-</div>
-</div>
-}
-</div>
+  <div class="hero-grid">
+    @for (heroe of heroes; track heroe.id) {
+      <div class="hero-card" (click)="openModal(heroe)">
+        <div class="card-image">
+          <img [src]="heroe.imagen_url ? 'assets/images/' + (heroe.imagen_url.startsWith('/') ? heroe.imagen_url.substring(1) : heroe.imagen_url) : 'assets/images/Placeholder.png'" [alt]="heroe.nombre">
+          <div class="overlay">
+            <button
+              (click)="addToFavorites(heroe); $event.stopPropagation()"
+              [class.is-fav]="heroe.esFavorito"
+              class="btn-fav">
+              {{ heroe.esFavorito ? '❤️' : '🤍' }}
+            </button>
+          </div>
+        </div>
+        <div class="card-content">
+          <h3>{{ heroe.nombre }}</h3>
+          <p class="power-tag">{{ heroe.poder }}</p>
+        </div>
+      </div>
+    }
+  </div>
 } @else {
-<div class="empty-msg">No se encontraron superhéroes.</div>
+  <div class="empty-msg">No se encontraron superhéroes.</div>
+}
+
+@if (selectedHero) {
+  <app-hero-detail-modal
+    [hero]="selectedHero"
+    (closed)="closeModal()"
+    (heroUpdated)="onHeroUpdated($event)"
+    (favToggled)="onFavToggled($event)"
+  />
 }
