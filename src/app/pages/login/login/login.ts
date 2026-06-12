@@ -33,7 +33,7 @@ console.log('Formulario de login válido:', this.loginForm.value);
 this.authService.login(this.loginForm.value).subscribe({
 next: (res: any) => {
 this.authService.setLoginData(res.nombre, res.token);
-localStorage.setItem('user_email',this.loginForm.value.email);
+localStorage.setItem('user_email', this.loginForm.value.email);
 this.router.navigate(['/catalog']); // Redirigir al catálogo al entrar
 },
 error: (err) => {
